@@ -4,11 +4,11 @@ import { CORE_CONCEPTS } from './data.js';
 import Header from './components/Header/Header.jsx';
 import CoreConcept from './components/CoreConcpet.jsx';
 import TabButton from './components/TabButton.jsx';
-
+import { EXAMPLES } from './data.js'
 
 
 function App() {
-  const [slecectedTopic, setSelectedTopic] = useState('Please click a button');
+  const [slecectedTopic, setSelectedTopic] = useState();
 
   let tabContent = 'Please click a button';
 
@@ -33,12 +33,20 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton onSelect={(selectedContent) => handleSelect('component')}>Components</TabButton>
+            <TabButton onSelect={(selectedContent) => handleSelect('components')}>Components</TabButton>
             <TabButton onSelect={() => handleSelect('jsx')}>JSX</TabButton>
             <TabButton onSelect={() => handleSelect('props')}>Props</TabButton>
             <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
           </menu>
-          {slecectedTopic}
+          {!slecectedTopic ? <p>Please select a topic.</p> : (<div id="tab-content">
+            <h3>{EXAMPLES[slecectedTopic].title}</h3>
+            <p>{EXAMPLES[slecectedTopic].description}</p>
+            <pre>
+              <code>
+                {EXAMPLES[slecectedTopic].code}
+              </code>
+            </pre>
+          </div>)}
         </section>
       </main>
 
